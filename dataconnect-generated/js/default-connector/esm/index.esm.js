@@ -1,5 +1,7 @@
+import { getDataConnect, validateArgs } from 'firebase/data-connect';
+
 export const connectorConfig = {
   connector: 'default',
   service: 'RPG-Game',
-  location: 'us-central1'
+  location: 'southamerica-east1'
 };
