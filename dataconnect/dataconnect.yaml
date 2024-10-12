@@ -1,6 +1,6 @@
 specVersion: "v1beta"
 serviceId: "RPG-Game"
-location: "us-central1"
+location: "southamerica-east1"
 schema:
   source: "./schema"
   datasource:
