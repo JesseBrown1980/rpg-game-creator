@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script type="module" src="js/firebaseConfig.js"></script>
     <script type="module" src="js/auth.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js"></script>
 </head>
 <body>
     <div id="main-page" class="page">
@@ -18,8 +19,6 @@
             <span onclick="navigateTo('library-page')">Biblioteca de RPG</span>
             <span onclick="navigateTo('communication-page')">Sistema de Comunicação</span>
             <span onclick="navigateTo('profile-page')">Perfil do Usuário</span>
-            <span onclick="openRegistrationForm()">Register</span>
-            <span onclick="openLoginForm()">Login</span>
         </div>
 
         <!-- Central Highlight Area -->
@@ -38,6 +37,7 @@
         </div>
     </div>
 
+    <!-- Market Page -->
     <div id="market-page" class="page" style="display: none;">
         <img src="images/market.png" alt="Market Background" class="background">
         <div class="text-options">
@@ -45,6 +45,7 @@
         </div>
     </div>
 
+    <!-- Workshop Page -->
     <div id="workshop-page" class="page" style="display: none;">
         <img src="images/workshop.png" alt="Workshop Background" class="background">
         <div class="text-options">
@@ -52,6 +53,7 @@
         </div>
     </div>
 
+    <!-- Library Page -->
     <div id="library-page" class="page" style="display: none;">
         <img src="images/library.png" alt="Library Background" class="background">
         <div class="text-options">
@@ -59,6 +61,7 @@
         </div>
     </div>
 
+    <!-- Communication Page -->
     <div id="communication-page" class="page" style="display: none;">
         <img src="images/communication.png" alt="Communication Background" class="background">
         <div class="text-options">
@@ -66,30 +69,12 @@
         </div>
     </div>
 
+    <!-- Profile Page -->
     <div id="profile-page" class="page" style="display: none;">
         <img src="images/profile.png" alt="Profile Background" class="background">
         <div class="text-options">
             <span onclick="navigateTo('main-page')">Back to Main Page</span>
         </div>
-    </div>
-
-    <!-- Registration Form -->
-    <div id="registration-form" class="form-container" style="display: none;">
-        <h2>Register</h2>
-        <input type="text" id="register-username" placeholder="Username">
-        <input type="email" id="register-email" placeholder="Email">
-        <input type="password" id="register-password" placeholder="Password">
-        <button onclick="registerUser()">Register</button>
-        <button onclick="closeForm('registration-form')">Close</button>
-    </div>
-
-    <!-- Login Form -->
-    <div id="login-form" class="form-container" style="display: none;">
-        <h2>Login</h2>
-        <input type="email" id="login-email" placeholder="Email">
-        <input type="password" id="login-password" placeholder="Password">
-        <button onclick="loginUser()">Login</button>
-        <button onclick="closeForm('login-form')">Close</button>
     </div>
 
     <!-- Navigation Bar -->
@@ -112,7 +97,18 @@
     </div>
 
     <script src="js/navigation.js"></script>
-    <script>
+    <script type="module">
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js";
+        const auth = getAuth();
+
+        // Ensure user is authenticated before accessing the main page
+        onAuthStateChanged(auth, (user) => {
+            if (!user) {
+                // If user is not logged in, redirect to login page
+                window.location.href = 'index.html';
+            }
+        });
+
         let currentHighlight = 0;
         const highlightItems = document.querySelectorAll('.highlight-item');
 
@@ -128,18 +124,6 @@
         // Close form function
         function closeForm(formId) {
             document.getElementById(formId).style.display = 'none';
-        }
-
-        // Register user function (placeholder)
-        function registerUser() {
-            // Add logic here for user registration
-            alert("Register button clicked");
-        }
-
-        // Login user function (placeholder)
-        function loginUser() {
-            // Add logic here for user login
-            alert("Login button clicked");
         }
     </script>
 </body>

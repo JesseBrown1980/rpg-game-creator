@@ -125,6 +125,7 @@ body {
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    width: 300px;
 }
 
 input {
@@ -132,10 +133,72 @@ input {
     margin: 10px 0;
     padding: 10px;
     width: 90%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 
 button {
     margin-top: 10px;
     padding: 10px;
     cursor: pointer;
+    background: #333;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background: #555;
+}
+
+/* Additional Login/Register Form Styling */
+#login-form,
+#registration-form {
+    display: none; /* Hide forms initially */
+}
+
+#login-form.active,
+#registration-form.active {
+    display: block; /* Show when active */
+}
+
+#login-form h2,
+#registration-form h2 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.form-container button {
+    width: 100%;
+}
+
+/* Add visual feedback for inputs on focus */
+input:focus {
+    outline: none;
+    border-color: #f39c12;
+}
+
+/* Button Styling for Register/Login */
+.text-options span.register,
+.text-options span.login {
+    color: #f39c12;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+.text-options span.register:hover,
+.text-options span.login:hover {
+    color: #e67e22;
+}
+
+/* Smooth Page Transitions */
+.page {
+    transition: opacity 0.3s ease;
+}
+
+.page.hidden {
+    opacity: 0;
+    pointer-events: none;
 }

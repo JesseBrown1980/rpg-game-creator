@@ -1,4 +1,4 @@
-import { auth, db, createUserWithEmailAndPassword, signInWithEmailAndPassword } from './firebaseConfig.js';
+import { auth, db, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from './firebaseConfig.js';
 import { doc, setDoc } from 'firebase/firestore'; // Import Firestore methods
 
 // Function to register a new user
@@ -20,6 +20,9 @@ async function registerUser() {
         console.log('User registered:', user);
         alert('Registration successful!');
         closeForm('registration-form');
+
+        // Redirect to main page
+        window.location.href = 'main.html';
     } catch (error) {
         console.error('Error:', error.code, error.message);
         alert(`Error: ${error.message}`);
@@ -38,12 +41,42 @@ function loginUser() {
             console.log('User logged in:', user);
             alert('Login successful!');
             closeForm('login-form');
+
+            // Redirect to main page
+            window.location.href = 'main.html';
         })
         .catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
             console.error('Error:', errorCode, errorMessage);
             alert(`Error: ${errorMessage}`);
+        });
+}
+
+// Function to log in with Google
+function loginWithGoogle() {
+    const provider = new GoogleAuthProvider();
+
+    signInWithPopup(auth, provider)
+        .then((result) => {
+            // User signed in successfully
+            const user = result.user;
+
+            // Add user details to Firestore if they are new
+            setDoc(doc(db, 'users', user.uid), {
+                username: user.displayName,
+                email: user.email
+            }, { merge: true });
+
+            console.log('User signed in with Google:', user);
+            alert('Login successful!');
+
+            // Redirect to main page
+            window.location.href = 'main.html';
+        })
+        .catch((error) => {
+            console.error('Error with Google Sign-In:', error.code, error.message);
+            alert(`Error: ${error.message}`);
         });
 }
 
@@ -66,3 +99,4 @@ window.loginUser = loginUser;
 window.openRegistrationForm = openRegistrationForm;
 window.openLoginForm = openLoginForm;
 window.closeForm = closeForm;
+window.loginWithGoogle = loginWithGoogle;
