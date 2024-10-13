@@ -1,57 +1,110 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Welcome to RPG Game</title>
-    <style media="screen">
-      body {
-        background: #1ABC9C;
-        color: #FFFFFF;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-      }
-      #message {
-        background: #16A085;
-        max-width: 500px;
-        text-align: center;
-        padding: 30px;
-        border-radius: 10px;
-      }
-      #message h1 {
-        font-size: 30px;
-        font-weight: bold;
-        color: #FFFFFF;
-      }
-      #message p {
-        margin: 20px 0;
-        font-size: 18px;
-        color: #ECF0F1;
-      }
-      #message a {
-        display: inline-block;
-        background: #E67E22;
-        color: #FFFFFF;
-        text-decoration: none;
-        padding: 12px 25px;
-        border-radius: 5px;
-        transition: background 0.3s;
-      }
-      #message a:hover {
-        background: #D35400;
-      }
+    <title>Login to RPG Game</title>
+    <link rel="stylesheet" href="styles.css">
+    <script type="module" src="js/firebaseConfig.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js"></script>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js";
+        import { getAuth, GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js";
+
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_PROJECT_ID.appspot.com",
+            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        
+        // Google Sign In
+        function googleSignIn() {
+            const provider = new GoogleAuthProvider();
+            signInWithPopup(auth, provider)
+                .then((result) => {
+                    // Redirect to main page after successful login
+                    window.location.href = 'main.html';
+                }).catch((error) => {
+                    console.error("Error signing in: ", error);
+                });
+        }
+
+        // Email/Password Login
+        function emailSignIn() {
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+
+            signInWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    // Redirect to main page after successful login
+                    window.location.href = 'main.html';
+                })
+                .catch((error) => {
+                    console.error("Error logging in: ", error);
+                });
+        }
+
+        // Email/Password Registration
+        function registerUser() {
+            const email = document.getElementById('register-email').value;
+            const password = document.getElementById('register-password').value;
+
+            createUserWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    // User registration successful, go to main page
+                    window.location.href = 'main.html';
+                })
+                .catch((error) => {
+                    console.error("Error registering user: ", error);
+                });
+        }
+    </script>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            background-image: url('images/background.jpg');
+            background-size: cover;
+        }
+        #login-container {
+            background-color: white;
+            padding: 2em;
+            border-radius: 5px;
+            text-align: center;
+        }
+        #login-container button {
+            margin-top: 1em;
+        }
     </style>
-  </head>
-  <body>
-    <div id="message">
-      <h1>Welcome to RPG Game</h1>
-      <p>Your adventure starts here. Are you ready to create your own story?</p>
-      <a href="/explore.html">Start Your Adventure</a>
+</head>
+<body>
+    <div id="login-container">
+        <h2>Login to RPG Game</h2>
+        <button onclick="googleSignIn()">Login with Google</button>
+        <hr>
+        <div>
+            <input type="email" id="login-email" placeholder="Email"><br>
+            <input type="password" id="login-password" placeholder="Password"><br>
+            <button onclick="emailSignIn()">Login with Email</button>
+        </div>
+        <hr>
+        <div>
+            <h3>Register</h3>
+            <input type="email" id="register-email" placeholder="Email"><br>
+            <input type="password" id="register-password" placeholder="Password"><br>
+            <button onclick="registerUser()">Register</button>
+        </div>
     </div>
-  </body>
+</body>
 </html>
