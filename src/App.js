@@ -11,6 +11,8 @@ import Communication from './pages/Communication';
 import Profile from './pages/Profile';
 import Layout from './components/Layout';
 
+console.log('Loading App.js');
+
 const ProtectedRoute = ({ children }) => {
   const [user, setUser] = React.useState(null);
   const [loading, setLoading] = React.useState(true);
@@ -36,6 +38,7 @@ const ProtectedRoute = ({ children }) => {
 };
 
 function App() {
+  console.log('Initializing App component and setting up routes...');
   return (
     <Router>
       <Routes>
