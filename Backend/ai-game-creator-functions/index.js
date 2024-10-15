@@ -7,7 +7,7 @@
  * See a full list of supported triggers at https://firebase.google.com/docs/functions
  */
 
-const {onRequest} = require("firebase-functions/v2/https");
+const {onRequest, onCall} = require("firebase-functions/v2/https");
 const logger = require("firebase-functions/logger");
 
 // Create and deploy your first functions
@@ -17,3 +17,20 @@ const logger = require("firebase-functions/logger");
 //   logger.info("Hello logs!", {structuredData: true});
 //   response.send("Hello from Firebase!");
 // });
+
+exports.helloWorld = onRequest((request, response) => {
+  logger.info("Hello logs!", {structuredData: true});
+  response.send("Hello from Firebase!");
+});
+
+exports.generateCharacter = onCall((data, context) => {
+  // Here you would implement your character generation logic
+  const character = {
+    name: "Random Character",
+    class: "Warrior",
+    level: 1,
+    // ... other character properties
+  };
+
+  return character;
+});
