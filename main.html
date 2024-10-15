@@ -3,23 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Immersive RPG Adventure Game with marketplace, workshop, and more">
     <title>RPG Adventure Game</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script type="module" src="js/firebaseConfig.js"></script>
     <script type="module" src="js/auth.js"></script>
-    <script type="module" src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js"></script>
+    <script type="module" src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js"></script>
 </head>
 <body>
     <div id="main-page" class="page">
-        <img src="images/main.png" alt="Main Background" class="background">
-        <div class="text-options">
-            <span onclick="navigateTo('market-page')">Market Place</span>
-            <span onclick="navigateTo('workshop-page')">Oficina de Criação</span>
-            <span onclick="navigateTo('library-page')">Biblioteca de RPG</span>
-            <span onclick="navigateTo('communication-page')">Sistema de Comunicação</span>
-            <span onclick="navigateTo('profile-page')">Perfil do Usuário</span>
-        </div>
+        <img src="images/main.png" alt="Main Background" class="background" loading="lazy">
+        <nav class="text-options">
+            <button data-navigate="market-page" aria-label="Go to Market Place">Market Place</button>
+            <button data-navigate="workshop-page" aria-label="Go to Creation Workshop">Oficina de Criação</button>
+            <button data-navigate="library-page" aria-label="Go to Library">Biblioteca de RPG</button>
+            <button data-navigate="communication-page" aria-label="Go to Communication">Sistema de Comunicação</button>
+            <button data-navigate="profile-page" aria-label="Go to Profile">Perfil do Usuário</button>
+        </nav>
 
         <!-- Central Highlight Area -->
         <div class="highlight-carousel">
@@ -78,27 +79,27 @@
     </div>
 
     <!-- Navigation Bar -->
-    <div class="navigation-bar">
-        <div onclick="navigateTo('market-page')">
+    <nav class="navigation-bar">
+        <button data-navigate="market-page" aria-label="Go to Market Place">
             <i class="fa fa-shopping-cart"></i> Market Place
-        </div>
-        <div onclick="navigateTo('workshop-page')">
+        </button>
+        <button data-navigate="workshop-page" aria-label="Go to Workshop">
             <i class="fa fa-tools"></i> Workshop
-        </div>
-        <div onclick="navigateTo('library-page')">
+        </button>
+        <button data-navigate="library-page" aria-label="Go to Library">
             <i class="fa fa-book"></i> Library
-        </div>
-        <div onclick="navigateTo('communication-page')">
+        </button>
+        <button data-navigate="communication-page" aria-label="Go to Communication">
             <i class="fa fa-comments"></i> Communication
-        </div>
-        <div onclick="navigateTo('profile-page')">
+        </button>
+        <button data-navigate="profile-page" aria-label="Go to Profile">
             <i class="fa fa-user"></i> Profile
-        </div>
-    </div>
+        </button>
+    </nav>
 
     <script src="js/navigation.js"></script>
     <script type="module">
-        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
         const auth = getAuth();
 
         // Ensure user is authenticated before accessing the main page

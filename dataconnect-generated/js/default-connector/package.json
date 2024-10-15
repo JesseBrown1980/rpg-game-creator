@@ -5,7 +5,7 @@
   "description": "Generated SDK For default",
   "license": "Apache-2.0",
   "engines": {
-    "node": ">=18.0"
+    "node": " >=18.0"
   },
   "typings": "index.d.ts",
   "module": "esm/index.esm.js",
@@ -24,10 +24,5 @@
   },
   "dependencies": {
     "@firebasegen/default-connector": "file:"
-  },
-  "scripts": {
-    "build": "webpack --config webpack.config.js",
-    "start": "firebase serve",
-    "deploy": "firebase deploy"
   }
 }

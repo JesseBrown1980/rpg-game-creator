@@ -1,0 +1,76 @@
+/* Main Page Styles */
+:root {
+  --main-bg-color: #333;
+  --accent-color: #f39c12;
+  --transition-time: 0.3s;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+}
+
+.page {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+}
+
+.background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    z-index: -1;
+}
+
+.text-options {
+    position: absolute;
+    top: 20%;
+    left: 10%;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.text-options span:hover {
+    text-decoration: underline;
+}
+
+.navigation-bar {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 60px;
+    background: var(--main-bg-color);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    color: white;
+}
+
+.navigation-bar div {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 16px;
+    transition: color var(--transition-time);
+}
+
+.navigation-bar div:hover {
+    color: var(--accent-color);
+}
+
+.navigation-bar i {
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+
+/* ... (rest of your original CSS for main page components) ... */
+
