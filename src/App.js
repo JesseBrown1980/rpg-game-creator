@@ -27,13 +27,16 @@ const ProtectedRoute = ({ children }) => {
   }, []);
 
   if (loading) {
+    console.log('Loading user data...');
     return <div>Loading...</div>;
   }
 
   if (!user) {
+    console.log('No user found, redirecting to login...');
     return <Navigate to="/login" />;
   }
 
+  console.log('User authenticated, accessing protected route...');
   return children;
 };
 

@@ -41,10 +41,11 @@
   },
   "scripts": {
     "start": "webpack serve --mode development",
-    "build": "webpack --config webpack.config.js",
+    "build": "webpack --mode production",
     "lint": "eslint 'src/**/*.{js,jsx}'",
     "test": "jest",
     "format": "prettier --write 'src/**/*.{js,jsx,ts,tsx,json,css,scss,md}'",
     "deploy": "firebase deploy"
-  }
+  },
+  "keywords": []
 }
